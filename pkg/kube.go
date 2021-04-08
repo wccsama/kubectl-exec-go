@@ -9,6 +9,7 @@ import (
 
 	api "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/cli-runtime/pkg/genericclioptions"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/client-go/rest"
@@ -69,10 +70,11 @@ func NewRestConfig(kubeConfig string) (*rest.Config, error) {
 }
 
 type Option struct {
-	NameSpace string
-	PodName   string
-	Container string
-	Commands  []string
+	genericclioptions.IOStreams // kubectl io
+	NameSpace                   string
+	PodName                     string
+	Container                   string
+	Commands                    []string
 }
 
 type Response struct {
